@@ -21,6 +21,7 @@
 use Cartalyst\Sentry\Cookies\IlluminateCookie;
 use Cartalyst\Sentry\Groups\Eloquent\Provider as GroupProvider;
 use Cartalyst\Sentry\Hashing\BcryptHasher;
+use Cartalyst\Sentry\Hashing\WpHasher;
 use Cartalyst\Sentry\Hashing\NativeHasher;
 use Cartalyst\Sentry\Hashing\Sha256Hasher;
 use Cartalyst\Sentry\Hashing\WhirlpoolHasher;
@@ -85,6 +86,10 @@ class SentryServiceProvider extends ServiceProvider {
 
 				case 'bcrypt':
 					return new BcryptHasher;
+					break;
+
+				case 'wp':
+					return new WpHasher;
 					break;
 
 				case 'sha256':
