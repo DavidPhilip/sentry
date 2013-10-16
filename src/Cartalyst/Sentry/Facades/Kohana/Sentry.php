@@ -61,6 +61,9 @@ class Sentry extends Facade {
 			case 'Sha256':
 				$hasher = new \Cartalyst\Sentry\Hashing\Sha256Hasher;
 				break;
+			case 'Wp':
+				$hasher = new \Cartalyst\Sentry\Hashing\WpHasher;
+				break;
 		}
 
 		return new BaseSentry(
