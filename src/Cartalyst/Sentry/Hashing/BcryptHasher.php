@@ -18,7 +18,7 @@
  * @link       http://cartalyst.com
  */
 
-class BcryptHasher implements HasherInterface {
+class BcryptHasher extends BaseHasher implements HasherInterface {
 
 	/**
 	 * Hash strength.
@@ -50,7 +50,7 @@ class BcryptHasher implements HasherInterface {
 
 		//create prefix; $2y$ fixes blowfish weakness
 		$prefix = PHP_VERSION_ID < 50307 ? '$2a$' : '$2y$';
-		
+
 		return crypt($string, $prefix.$strength.'$'.$salt.'$');
 	}
 
@@ -63,7 +63,7 @@ class BcryptHasher implements HasherInterface {
 	 */
 	public function checkhash($string, $hashedString)
 	{
-		return crypt($string, $hashedString) === $hashedString;
+		return $this->slowEquals(crypt($string, $hashedString), $hashedString);
 	}
 
 	/**
